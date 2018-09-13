@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Glugox_Core active="1">
+            <version>0.1.0</version>
+            <name>Core</name>
+            <description>Core functionalities. Other packages can extend them.</description>
+            <icon>fa fa-connectdevelop</icon>
+        </Glugox_Core>
+    </modules>
+    <admin>
+        <settings>
+            <core>
+                <setting>
+                    <config_key>logo_img</config_key>
+                    <config_val></config_val>
+                    <data_type>image</data_type>
+                    <resource_class>Glugox\Core\Presenters\HtmlElements\LogoImage</resource_class>
+                    <label>Logo Image</label>
+                    <allow_null>0</allow_null>
+                    <roles>-1</roles>
+                    <description></description>
+                </setting>
+                <setting>
+                    <config_key>show_brant_text</config_key>
+                    <config_val>0</config_val>
+                    <data_type>boolean</data_type>
+                    <resource_class></resource_class>
+                    <label>Show brand text</label>
+                    <roles>-1</roles>
+                    <description>If checked, the brand name will be shown next to brand logo</description>
+                </setting>
+                <setting>
+                    <config_key>allow_search</config_key>
+                    <config_val>0</config_val>
+                    <data_type>boolean</data_type>
+                    <resource_class></resource_class>
+                    <label>Allow search</label>
+                    <roles>1000</roles>
+                </setting>
+                <setting>
+                    <config_key>date_format</config_key>
+                    <config_val>d.m.Y</config_val>
+                    <data_type>string</data_type>
+                    <resource_class></resource_class>
+                    <label>Date format</label>
+                    <roles>-1</roles>
+                    <description><![CDATA[<a href="http://php.net/manual/en/function.date.php" target="_blank">http://php.net/manual/en/function.date.php</a>]]></description>
+                </setting>
+                <setting>
+                    <config_key>subscribe_admin_to_all_comments</config_key>
+                    <config_val>0</config_val>
+                    <data_type>boolean</data_type>
+                    <resource_class></resource_class>
+                    <label>Subscribe Admin To All Comments</label>
+                    <roles>-1</roles>
+                    <description>If checked, admin will receive notifications whenever user has commented something, no matter if admin is related to commented model</description>
+                </setting>
+                <setting>
+                    <config_key>max_comments_visible</config_key>
+                    <config_val>10</config_val>
+                    <data_type>int</data_type>
+                    <resource_class></resource_class>
+                    <label>Max Comments Visible</label>
+                    <roles>-1</roles>
+                    <description>Maximum number of comments before pagination or load more button is shown</description>
+                </setting>
+            </core>
+        </settings>
+    </admin>
+    <frontend>
+        <routers></routers>
+        <layout></layout>
+    </frontend>
+    <global>
+        <blocks></blocks>
+        <helpers></helpers>  
+    </global>
+    <default></default>
+</config>
