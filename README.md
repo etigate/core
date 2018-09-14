@@ -25,9 +25,9 @@ Core
 
 
 
-// WEBPACK
+#### WEBPACK
 
-// DEV Only //
+#### DEV Only
 
 ```
 mix.webpackConfig({ 
@@ -39,8 +39,10 @@ mix.webpackConfig({
         ]
     } 
 });
-```
+
 
 
 mix.react('vendor/etigate/core/resources/js/core.js', 'public/js')
    .sass('vendor/etigate/core/resources/sass/core.scss', 'public/css');
+
+```
