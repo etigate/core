@@ -17,3 +17,25 @@
         "reselect": "^3.0.1",
         "admin-lte": "3.0.0-alpha.2"
     }
+
+
+
+
+// WEBPACK
+
+// DEV Only //
+
+mix.webpackConfig({ 
+    resolve: { 
+        symlinks: false ,
+        modules: [
+            path.resolve('./vendor/etigate/core/resources/js'),
+            path.resolve('./node_modules')
+        ]
+    } 
+});
+
+
+
+mix.react('vendor/etigate/core/resources/js/core.js', 'public/js')
+   .sass('vendor/etigate/core/resources/sass/core.scss', 'public/css');
