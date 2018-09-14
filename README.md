@@ -1,3 +1,7 @@
+Core
+====
+
+```
 "dependencies": {
         "axios": "^0.18.0",
         "babel-plugin-react-css-modules": "^3.4.2",
@@ -17,7 +21,7 @@
         "reselect": "^3.0.1",
         "admin-lte": "3.0.0-alpha.2"
     }
-
+```
 
 
 
@@ -25,6 +29,7 @@
 
 // DEV Only //
 
+```
 mix.webpackConfig({ 
     resolve: { 
         symlinks: false ,
@@ -34,7 +39,7 @@ mix.webpackConfig({
         ]
     } 
 });
-
+```
 
 
 mix.react('vendor/etigate/core/resources/js/core.js', 'public/js')
