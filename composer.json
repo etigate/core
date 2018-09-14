@@ -12,7 +12,13 @@
             "Glugox\\Core\\": "./src/"
         }
     },
-    
+    "extra": {
+		"laravel": {
+			"providers": [
+				"Glugox\\Core\\CoreServiceProvider"
+			]
+		}
+	},
     "scripts": {
         "post-package-install": [
             "php artisan migrate",

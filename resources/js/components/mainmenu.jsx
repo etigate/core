@@ -9,10 +9,10 @@
 
 import React, { Component } from 'react';
 
-export default class Sidebar extends Component {
+export default class MainMenu extends Component {
     render() {
         return (
-            <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <aside className="main-sidebar sidebar-dark-primary elevation-4">
                     
             </aside>
         )

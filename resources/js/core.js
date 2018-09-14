@@ -8,7 +8,9 @@ require('./bootstrap');
 
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/App';
+import { App } from './App';
+
+import { AppContainer } from 'react-hot-loader'
 
 
 /**
@@ -19,5 +21,18 @@ import App from './components/App';
 
 
 if (document.getElementById('etigate')) {
-    ReactDOM.render(<App />, document.getElementById('etigate'));
+    ReactDOM.render(
+            <AppContainer warnings={false}>
+                <App />
+            </AppContainer>, 
+            document.getElementById('etigate')
+            );
+}
+
+
+/**
+ * Webpack Hot Module Replacement API
+ */
+if (module.hot) {
+  module.hot.accept()
 }

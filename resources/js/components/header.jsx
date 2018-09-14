@@ -10,11 +10,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-class NavbarComponent extends React.Component {
+export default  class Header extends React.Component {
     render(){
         return(
             <nav className="main-header navbar navbar-expand bg-white navbar-light border-bottom">
-                {props.children}    
+                
             </nav>
         );
     }
@@ -27,7 +27,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-export const Navbar = connect(
+/*export const Header = connect(
   mapStateToProps,
   null
-)(NavbarComponent)
+)(HeaderComponent)*/
