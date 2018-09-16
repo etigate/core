@@ -25,7 +25,7 @@ php artisan module:install
 ```
 
 
-#### DEV Only
+#### Development Only
 
 ##### .package.json
 
@@ -52,20 +52,27 @@ php artisan module:install
 ```
 
 
+##### webpack.mix.js
+
 ```
-mix.webpackConfig({ 
-    resolve: { 
+mix.webpackConfig({
+    resolve: {
         symlinks: false ,
         modules: [
             path.resolve('./vendor/etigate/core/resources/js'),
             path.resolve('./node_modules')
         ]
-    } 
+    }
 });
 
 
 
-mix.react('vendor/etigate/core/resources/js/core.js', 'public/js')
-   .sass('vendor/etigate/core/resources/sass/core.scss', 'public/css');
+mix.react('vendor/etigate/core/resources/js/core.js', 'vendor/etigate/core/public/js')
+    .sass('vendor/etigate/core/resources/sass/core.scss', 'vendor/etigate/core/public/css');
 
+```
+
+
+```
+npm run dev
 ```
