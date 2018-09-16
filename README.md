@@ -76,3 +76,10 @@ mix.react('vendor/etigate/core/resources/js/core.js', 'public/js')
 ```
 npm run dev
 ```
+
+
+#### Serve
+
+```
+php artisan serve
+```
