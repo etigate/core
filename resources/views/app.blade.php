@@ -20,13 +20,13 @@
       <!-- CSRF Token -->
       <meta name="csrf-token" content="{{ csrf_token() }}">
 
-      <title>{{ $core->service('config')->get('app_name') }}</title>
+      <title>{{ core_config('app_name') }}</title>
 
       <!-- Styles -->
       <link href="/css/core.css" rel="stylesheet" />
   </head>
 </head>
-<body class="{{ $core->service('html')->get('body_classes') }}">
+<body class="{{ core_html('body_classes') }}">
   <div id="etigate">
 
   </div>

@@ -14,8 +14,10 @@ namespace Glugox\Core;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Contracts\Routing\Registrar as RouteRegistrar;
 
 use Glugox\Core\Contracts\IModule;
+use Glugox\Core\Models\Config;
 
 /**
  * Description of EtiServiceProvider
@@ -61,13 +63,13 @@ class ModuleServiceProvider extends ServiceProvider implements IModule {
      *
      * @return void
      */
-    public function boot(\Illuminate\Routing\Router $router )
+    public function boot(\Illuminate\Routing\Router $router, RouteRegistrar $routeRegistrar )
     {
         
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         
         $this->registerEvents();
-        $this->registerRoutes();
+        $this->registerRoutes($routeRegistrar);
         $this->registerResources();
         $this->defineAssetPublishing();
     }
@@ -91,17 +93,52 @@ class ModuleServiceProvider extends ServiceProvider implements IModule {
      *
      * @return void
      */
-    protected function registerRoutes()
+    protected function registerRoutes(RouteRegistrar $routeRegistrar)
     {
 
-        Route::group([
-            'prefix' => config('core.uri', 'core'),
+        /*Route::group([
+            'prefix' => config('core.uri', ''),
             'namespace' => 'Glugox\Core\Http\Controllers',
             //'middleware' => config('core.middleware', 'web'),
         ], function () {
             $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
-        });
+            $this->loadRoutesFrom(__DIR__.'/../routes/api.php');
+        });*/
+        
+        $this->mapApiRoutes($routeRegistrar);
+        $this->mapWebRoutes($routeRegistrar);
     }
+    
+    
+    /**
+     * Define the "web" routes for the application.
+     *
+     * These routes all receive session state, CSRF protection, etc.
+     *
+     * @return void
+     */
+    protected function mapWebRoutes(RouteRegistrar $routeRegistrar)
+    {
+        $routeRegistrar->middleware('web')
+             ->namespace('Glugox\Core\Http\Controllers')
+             ->group(__DIR__.'/../routes/web.php');
+    }
+    /**
+     * Define the "api" routes for the application.
+     *
+     * These routes are typically stateless.
+     *
+     * @return void
+     */
+    protected function mapApiRoutes(RouteRegistrar $routeRegistrar)
+    {
+        $routeRegistrar->prefix('api')
+             ->middleware('api')
+             ->namespace('Glugox\Core\Http\Controllers\Api')
+             ->group(__DIR__.'/../routes/api.php');
+    }
+    
+    
     /**
      * Register the Horizon resources.
      *
@@ -212,6 +249,8 @@ class ModuleServiceProvider extends ServiceProvider implements IModule {
         
         
         $moduleId = static::getModuleId();
+        core_debug("Installing " . $moduleId . '...');
+        
 
         // load module's config file
         $configFile = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'etc' . DIRECTORY_SEPARATOR . "config.xml";
@@ -219,13 +258,22 @@ class ModuleServiceProvider extends ServiceProvider implements IModule {
         // load module's config file
         if (\file_exists($configFile)) {
             $configData = \file_get_contents($configFile);
-            $xml = simplexml_load_string($configData, 'Glugox\Core\Models\Config', LIBXML_NOBLANKS | LIBXML_NOEMPTYTAG);  
-            app('core')->service('config')->applyXml($xml->admin->settings->$moduleId->setting);
             
+            $config = new Config($configData);
+            $configArr = $config->toArray();
             
+            core_debug(" >> settings");
+            core_config()->applyXml($configArr['admin']['settings'][$moduleId]['setting']);
+            
+            core_debug(" >> acl");
+            core_auth()->addACL($configArr['global'][$moduleId]['acl']);
         }
 
         
     }
+    
+    
+    
+
 
 }

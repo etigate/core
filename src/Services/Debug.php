@@ -16,13 +16,13 @@ namespace Glugox\Core\Services;
  *
  * @author User
  */
-class Html extends Service {
+class Debug extends Service {
     
-    
-    // Service data
-    protected function getData(){
-        return [
-            'body_classes' => 'etigate'
-        ];
+    /**
+     * 
+     * @param type $msg
+     */
+    public function info($msg){
+        //\Debugbar::info( $msg );
     }
 }

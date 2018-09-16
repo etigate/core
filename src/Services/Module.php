@@ -12,6 +12,7 @@
 namespace Glugox\Core\Services;
 
 use Illuminate\Support\Arr;
+use Illuminate\Foundation\PackageManifest;
 
 use Glugox\Core\Contracts\IModule;
 use Glugox\Core\BasicServiceProvider;
@@ -23,14 +24,31 @@ use Glugox\Core\CoreServiceProvider;
  * @author User
  */
 class Module extends Service {
+    
+    
+    /**
+     *
+     * @var array
+     */
+    protected $packages = [];
+            
+    
+    /**
+     * 
+     * @param PackageManifest $manifest
+     */
+    function __construct(PackageManifest $manifest) {
+        $manifest->build();
+        $this->packages = $manifest->providers();
+    }
 
-    /** 
+        /** 
      * Returns array of classes (Service Providers) that implements IModule interface.
      * 
      * @return array
      */
     public function all(){
-        return Arr::where(\config('app.providers'), function ($value) {
+        return Arr::where($this->packages, function ($value) {
             return \in_array(IModule::class, \class_implements($value));
         });   
     }

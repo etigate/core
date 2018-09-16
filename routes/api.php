@@ -9,13 +9,10 @@
  * file that was distributed with this source code.
  */
 
-
-$spa = function(){
-    return view(\resolve('core')->getView());
-};
+use Illuminate\Http\Request;
 
 
-/**
- * Catchall route for the single page application
- */
-Route::get('/{view?}', $spa)->where('view', '(.*)')->name('catchall');
+Route::get('/users/me', '\Glugox\Core\Http\Controllers\Api\SessionController@currentUser');
+Route::group(['middleware' => ['auth:api']], function () {
+    
+});

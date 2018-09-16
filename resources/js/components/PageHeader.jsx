@@ -1,5 +1,3 @@
-<?php
-
 /*
  * This file is part of Glugox.
  *
@@ -8,14 +6,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+import React from 'react'
 
 
-$spa = function(){
-    return view(\resolve('core')->getView());
-};
-
-
-/**
- * Catchall route for the single page application
- */
-Route::get('/{view?}', $spa)->where('view', '(.*)')->name('catchall');
+export const PageHeader = (props) => (
+  <div className="g-page-h">
+    
+  </div>
+)

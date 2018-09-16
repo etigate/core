@@ -11,88 +11,71 @@
 
 namespace Glugox\Core\Models;
 
+use Illuminate\Support\Arr;
+
 /**
  * Description of Config
  *
- * @author Ervin
+ * @author User
  */
-class Config extends \SimpleXMLElement{
-
+class Config {
+    
+    
+    private $data;
 
 
     /**
-     * Enter description here...
-     *
-     * @return boolean
+     * 
+     * @param string $xml
      */
-    public function hasChildren()
-    {
-        if (!$this->children()) {
-            return false;
+    public function __construct( string $xml='' ) {
+        if(!empty($xml)){
+            $this->data = simplexml_load_string(self::removeNamespaceFromXML($xml), null,  LIBXML_NOBLANKS);
+            $this->data = json_encode($this->data);
+            $this->data = json_decode($this->data, true);
         }
-
-        // simplexml bug: @attributes is in children() but invisible in foreach
-        foreach ($this->children() as $k=>$child) {
-            return true;
-        }
-        return false;
+        
+    }
+    
+    /**
+     * 
+     * @return type
+     */
+    public function toArray(){
+        return $this->data;
     }
 
-     /**
-     * Returns the node and children as an array
-     *
-     * @return array|string
-     */
-    public function asArray()
-    {
-        return $this->_asArray();
-    }
 
     /**
-     * asArray() analog, but without attributes
-     * @return array|string
+     * 
+     * @param type $xml
+     * @return type
      */
-    public function asCanonicalArray()
+    static function removeNamespaceFromXML( $xml )
     {
-        return $this->_asArray(true);
-    }
+        // Because I know all of the the namespaces that will possibly appear in 
+        // in the XML string I can just hard code them and check for 
+        // them to remove them
+        $toRemove = ['rap', 'turss', 'crim', 'cred', 'j', 'rap-code', 'evic'];
+        // This is part of a regex I will use to remove the namespace declaration from string
+        $nameSpaceDefRegEx = '(\S+)=["\']?((?:.(?!["\']?\s+(?:\S+)=|[>"\']))+.)["\']?';
 
-    /**
-     * Returns the node and children as an array
-     *
-     * @param bool $isCanonical - whether to ignore attributes
-     * @return array|string
-     */
-    protected function _asArray($isCanonical = false)
-    {
-        $result = [];
-        if (!$isCanonical) {
-            // add attributes
-            foreach ($this->attributes() as $attributeName => $attribute) {
-                if ($attribute) {
-                    $result['@'][$attributeName] = (string)$attribute;
-                }
-            }
+        // Cycle through each namespace and remove it from the XML string
+       foreach( $toRemove as $remove ) {
+            // First remove the namespace from the opening of the tag
+            $xml = str_replace('<' . $remove . ':', '<', $xml);
+            // Now remove the namespace from the closing of the tag
+            $xml = str_replace('</' . $remove . ':', '</', $xml);
+            // This XML uses the name space with CommentText, so remove that too
+            $xml = str_replace($remove . ':commentText', 'commentText', $xml);
+            // Complete the pattern for RegEx to remove this namespace declaration
+            $pattern = "/xmlns:{$remove}{$nameSpaceDefRegEx}/";
+            // Remove the actual namespace declaration using the Pattern
+            $xml = preg_replace($pattern, '', $xml, 1);
         }
-        // add children values
-        if ($this->hasChildren()) {
-            foreach ($this->children() as $childName => $child) {
-                $childArrItem = $child->_asArray($isCanonical);
-                if(!empty($childArrItem)){
-                    $result[$childName][] = $childArrItem;
-                }
 
-            }
-        } else {
-            if (empty($result)) {
-                // return as string, if nothing was found
-                $result = (string) $this;
-            } else {
-                // value has zero key element
-                $result[0] = (string) $this;
-            }
-        }
-        return $result;
+        // Return sanitized and cleaned up XML with no namespaces
+        return $xml;
     }
 
 }

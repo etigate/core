@@ -35,7 +35,7 @@ class Config extends Service {
      */
     public function applyXml( $settings ){
         foreach ($settings as $setting){
-            $this->configRepository->upsert((array)$setting, ['config_key']);
+            $this->configRepository->upsert(['config_key' => $setting['config_key']], $setting);
         }
         
         

@@ -27,6 +27,7 @@
                     <data_type>boolean</data_type>
                     <resource_class></resource_class>
                     <label>Show brand text</label>
+                    <allow_null>0</allow_null>
                     <roles>-1</roles>
                     <description>If checked, the brand name will be shown next to brand logo</description>
                 </setting>
@@ -36,7 +37,9 @@
                     <data_type>boolean</data_type>
                     <resource_class></resource_class>
                     <label>Allow search</label>
+                    <allow_null>0</allow_null>
                     <roles>1000</roles>
+                    <description></description>
                 </setting>
                 <setting>
                     <config_key>date_format</config_key>
@@ -44,6 +47,7 @@
                     <data_type>string</data_type>
                     <resource_class></resource_class>
                     <label>Date format</label>
+                    <allow_null>0</allow_null>
                     <roles>-1</roles>
                     <description><![CDATA[<a href="http://php.net/manual/en/function.date.php" target="_blank">http://php.net/manual/en/function.date.php</a>]]></description>
                 </setting>
@@ -53,6 +57,7 @@
                     <data_type>boolean</data_type>
                     <resource_class></resource_class>
                     <label>Subscribe Admin To All Comments</label>
+                    <allow_null>0</allow_null>
                     <roles>-1</roles>
                     <description>If checked, admin will receive notifications whenever user has commented something, no matter if admin is related to commented model</description>
                 </setting>
@@ -62,6 +67,7 @@
                     <data_type>int</data_type>
                     <resource_class></resource_class>
                     <label>Max Comments Visible</label>
+                    <allow_null>0</allow_null>
                     <roles>-1</roles>
                     <description>Maximum number of comments before pagination or load more button is shown</description>
                 </setting>
@@ -75,6 +81,26 @@
     <global>
         <blocks></blocks>
         <helpers></helpers>  
+        <core>
+            <acl>
+                <roles>
+                    <role>
+                        <name>Admin</name>
+                        <guard_name></guard_name>
+                    </role>
+                    <role>
+                        <name>Registered User</name>
+                        <guard_name></guard_name>
+                    </role>
+                </roles>
+                <permissions>
+                    <permission>
+                        <role></role>
+                        <name></name>
+                    </permission>
+                </permissions>
+            </acl>
+        </core>
     </global>
     <default></default>
 </config>

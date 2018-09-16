@@ -46,7 +46,6 @@ class InstallModule extends Command {
      */
     public function handle() {
 
-
         $moduleName = $this->getModuleName();
         $overWrite = $this->option('overwrite');
         $this->_installModule($moduleName, $overWrite);
@@ -68,6 +67,7 @@ class InstallModule extends Command {
                 \resolve('core')->service('module')->all() :
                 [\resolve('core')->service('module')->get($moduleName)]
             ;
+       
         
         /** IModule $module **/
         foreach ($all as $module){

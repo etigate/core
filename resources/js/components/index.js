@@ -8,5 +8,8 @@
  */
 
 export { AuthGuard } from './AuthGuard'
+export { PageHeader } from './PageHeader'
+export { PageFooter } from './PageFooter'
 export { ModalProviderWrapper, ModalRoot } from './Modal'
 export * from './Icons'
+export { NeutralButton, NegativeButton, PositiveButton } from './Button'

@@ -117,16 +117,9 @@ class EloquentRepository {
      * @param  array  $attributes
      * @return bool|int
      */
-    public function upsert(array $attributes, array $indexes) {
-
-        $model = $this->getByFields($attributes, $indexes);
-        $attributes = $this->prepareAttrs($attributes);
-        
-        if($model){ 
-            return $model->fill($attributes)->save();
-        }
-        return $this->getModelClass()::create($attributes);
-    }    
+    public function upsert(array $indexes, array $attributes) {
+        return $this->getModelClass()::updateOrCreate($indexes, $this->prepareAttrs($attributes));  
+    } 
     
     
     
@@ -143,7 +136,6 @@ class EloquentRepository {
         $builder = $modelClass;
         
         foreach ($indexes as $index){
-            //dd([$attributes, $index]);
             $builder = $builder::where($index, '=', $attributes[$index]);
         }
         $model = $builder->first();
@@ -158,7 +150,11 @@ class EloquentRepository {
      * @return type
      */
     public function prepareAttrs(array $attributes) {
-        return $attributes;
+        $preppared = [];
+        foreach ($attributes as $attributeKey => $attributeVal){
+            $preppared[$attributeKey] = empty($attributeVal) ? '' : $attributeVal;
+        }
+        return $preppared;
     }
     
 }
