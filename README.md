@@ -67,8 +67,8 @@ mix.webpackConfig({
 
 
 
-mix.react('vendor/etigate/core/resources/js/core.js', 'vendor/etigate/core/public/js')
-    .sass('vendor/etigate/core/resources/sass/core.scss', 'vendor/etigate/core/public/css');
+mix.react('vendor/etigate/core/resources/js/core.js', 'public/js')
+    .sass('vendor/etigate/core/resources/sass/core.scss', 'public/css');
 
 ```
 
