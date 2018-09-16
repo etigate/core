@@ -8,7 +8,7 @@ composer require glugox/core
 touch database/database.sqlite
 ```
 
-### .env
+##### .env
 
 ```
 DB_CONNECTION=sqlite
@@ -25,6 +25,9 @@ php artisan module:install
 ```
 
 
+#### DEV Only
+
+##### .package.json
 
 ```
 "dependencies": {
@@ -48,11 +51,6 @@ php artisan module:install
     }
 ```
 
-
-
-#### WEBPACK
-
-#### DEV Only
 
 ```
 mix.webpackConfig({ 
