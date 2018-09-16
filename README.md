@@ -1,5 +1,4 @@
-Core
-====
+
 
 Install
 =======
@@ -22,6 +21,7 @@ DB_PASSWORD=
 
 ```
 php artisan migrate
+php artisan module:install
 ```
 
 
