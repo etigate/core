@@ -6,7 +6,19 @@ Install
 
 ```
 composer require glugox/core
+touch database/database.sqlite
 php artisan migrate
+```
+
+### .env
+
+```
+DB_CONNECTION=sqlite
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE={$projectAbsPath}/database/database.sqlite
+DB_USERNAME=root
+DB_PASSWORD=
 ```
 
 
