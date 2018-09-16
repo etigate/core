@@ -1,6 +1,15 @@
 Core
 ====
 
+Install
+=======
+
+```
+composer require glugox/core
+```
+
+
+
 ```
 "dependencies": {
         "axios": "^0.18.0",
