@@ -6,6 +6,7 @@ Install
 
 ```
 composer require glugox/core
+php artisan migrate
 ```
 
 
