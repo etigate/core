@@ -7,3 +7,4 @@
  * file that was distributed with this source code.
  */
 export { DashboardLayout } from './Dashboard'
+export { FormPageLayout } from './FormPage'

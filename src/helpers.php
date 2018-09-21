@@ -11,7 +11,7 @@
 
 use Glugox\Core\Core;
 
-if (! function_exists('core_auth')) {
+if (! function_exists('core_config')) {
     
     /**
      * 
@@ -23,36 +23,49 @@ if (! function_exists('core_auth')) {
                 app('core')->service('config') :
                 app('core')->service('config')->get($key);
     }
-    
+}
+
+if (! function_exists('core_user')) {
     /**
      * 
      * @return Glugox\Core\Services\Auth
      */
-    function core_auth()
+    function core_user()
     {
-        return app('core')->service('auth');
+        return app('core')->service('user');
     }
-    
+
+}
+
+if (! function_exists('core_html')) {
     /**
-     * 
+     *
      * @return Glugox\Core\Services\Html
      */
-    function core_html ( $key = null )
+    function core_html($key = null)
     {
-        return $key === null ? 
-                app('core')->service('html') :
-                app('core')->service('html')->get($key);
+        return $key === null ?
+            app('core')->service('html') :
+            app('core')->service('html')->get($key);
     }
-    
+}
+
+
+if (! function_exists('core_module')) {
     /**
-     * 
+     *
      * @return Glugox\Core\Services\Module
      */
-    function core_module()
+    function core_module($moduleId = null)
     {
-        return app('core')->service('module');
+        return $moduleId === null ?
+            app('core')->service('module') :
+            app('core')->service('module')->get($moduleId);
     }
-    
+
+}
+
+if (! function_exists('core_debug')) {
     
     /**
      * 

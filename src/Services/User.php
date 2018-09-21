@@ -11,6 +11,7 @@
 
 namespace Glugox\Core\Services;
 
+
 use Glugox\ACL\Models\Role;
 use Glugox\ACL\Repositories\RolesRepository;
 
@@ -19,7 +20,7 @@ use Glugox\ACL\Repositories\RolesRepository;
  *
  * @author User
  */
-class Auth extends Service {
+class User extends Service {
     
     protected $rolesRepository;
 
@@ -37,13 +38,19 @@ class Auth extends Service {
 
         if(isset($acl['roles']['role'])){
             foreach ($acl['roles']['role'] as $role){
-                //$role = Role::updateOrCreate(['name' => $role['name']], $role);
                 $this->rolesRepository->upsert(['name' => $role['name']], $role);
             }
         }
     }
-   
-    
-    
-    
+
+    public function current(){
+        return \Auth::user();
+    }
+
+
+    public function getByEmail( $email ){
+        return \App\User::where('email', $email)->get();
+    }
+
+
 }

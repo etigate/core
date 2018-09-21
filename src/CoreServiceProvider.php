@@ -11,6 +11,7 @@
 
 namespace Glugox\Core;
 
+use Glugox\Core\Console\CreateAdminUser;
 use Glugox\Core\Contracts\IModule;
 
 /**
@@ -47,7 +48,8 @@ class CoreServiceProvider extends ModuleServiceProvider  {
      */
     public static function getCommands() {
         return [
-            \Glugox\Core\Console\InstallModule::class
+            \Glugox\Core\Console\InstallModule::class,
+            \Glugox\Core\Console\CreateAdminUser::class
         ];
     }
 }

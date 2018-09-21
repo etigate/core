@@ -2,8 +2,7 @@ import { sleep } from 'utility-functions'
 
 import { flashMessageActions as actions } from '../actions'
 
-export const flashMessage = (type, message, timeOut = 5000) => async (dispatch) => {
-  const uid = Date.now()
+export const flashMessage = (type, message, uid=Date.now(), timeOut = 5000) => async (dispatch) => {
 
   dispatch({
     type: actions.SHOW_MESSAGE,

@@ -8,12 +8,12 @@
  */
 import React from 'react'
 
-const baseButtonStyles = 'bg-transparent font-semibold border hover:text-white hover:border-transparent'
+const baseButtonStyles = 'btn btn-block btn-flat'
 
 export const NeutralButton = (props) => (
   <button
     {...props}
-    className={`${baseButtonStyles} hover:bg-blue text-blue-dark py-2 px-4 border-blue  ${props.className || ''}`}>
+    className={`${baseButtonStyles} btn-primary  ${props.className || ''}`}>
     {props.children}
   </button>
 )
@@ -21,7 +21,7 @@ export const NeutralButton = (props) => (
 export const NegativeButton = (props) => (
   <button
     {...props}
-    className={`${baseButtonStyles} hover:bg-red text-red-dark py-2 px-4 border-red ${props.className || ''}`}>
+    className={`${baseButtonStyles} btn-danger ${props.className || ''}`}>
     {props.children}
   </button>
 )
@@ -29,7 +29,7 @@ export const NegativeButton = (props) => (
 export const PositiveButton = (props) => (
   <button
     {...props}
-    className={`${baseButtonStyles} hover:bg-green text-green-dark py-2 px-4 border-green ${props.className || ''}`}>
+    className={`${baseButtonStyles} btn-success ${props.className || ''}`}>
     {props.children}
   </button>
 )

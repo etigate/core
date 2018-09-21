@@ -61,8 +61,7 @@ class InstallModule extends Command {
      */
     private function _installModule($moduleName = '', $overWrite = false) {
 
-        $this->info('installModule: '.$moduleName.'...');
-        $this->info('Module: '.\resolve('core')->service('module')->get($moduleName));
+        $this->info('Install Module: '. (empty($moduleName) ? '<all>' : $moduleName) .'...');
         $all = empty($moduleName) ?
                 \resolve('core')->service('module')->all() :
                 [\resolve('core')->service('module')->get($moduleName)]
@@ -73,6 +72,8 @@ class InstallModule extends Command {
         foreach ($all as $module){
             app()->call([$module, 'install']);
         }
+
+        $this->info('Done installing modules!');
     }
     
     

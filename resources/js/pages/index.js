@@ -7,3 +7,4 @@
  * file that was distributed with this source code.
  */
 export { Overview } from './Overview/Overview'
+export { LogIn } from './LogIn/LogIn'

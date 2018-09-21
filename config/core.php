@@ -26,5 +26,24 @@ return [
     |--------------------------------------------------------------------------
     |
     */
-    'middleware' => \Glugox\Core\Http\Middleware\AclMiddleware::class
+    'middleware' => \Glugox\Core\Http\Middleware\AclMiddleware::class,
+
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | User
+    |--------------------------------------------------------------------------
+    |
+    */
+    'user' => [
+        'admin' => [
+            'defaults' => [
+                'name' => 'Admin',
+                'email' => 'info@glugox.com',
+                'password' => 'secret',
+                'roles' => []
+            ]
+        ]
+    ]
 ];

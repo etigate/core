@@ -266,7 +266,7 @@ class ModuleServiceProvider extends ServiceProvider implements IModule {
             core_config()->applyXml($configArr['admin']['settings'][$moduleId]['setting']);
             
             core_debug(" >> acl");
-            core_auth()->addACL($configArr['global'][$moduleId]['acl']);
+            core_user()->addACL($configArr['global'][$moduleId]['acl']);
         }
 
         

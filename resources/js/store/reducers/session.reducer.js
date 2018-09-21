@@ -6,6 +6,9 @@ import { createReducer } from 'store/reducers/utilities'
 const { session } = initialState
 
 const setCurrentUser = (state, { user }) => {
+  console.log("Set current user: ")
+  console.log(user)
+
   return {
     ...state,
     currentUser: user.id
